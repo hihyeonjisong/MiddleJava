@@ -41,8 +41,10 @@ public class T07EqualsHashCodeTest {
 		Person p2 = new Person(1, "홍길동");
 		Person p3 = new Person(1, "이순신");
 		
-		//object에서의 equals는 같은 객체인지 확인한다(다른위치에 별도로 만들어진 객체라서)
+		//object의 안에있는 클래스인 equals는 같은 객체인지 확인한다(다른위치에 별도로 만들어진 객체라서)
 		//equals를 우리입맞에맞게 오버라이드 해서 true나왔음
+		//(equals는 두 객체의 값이 같은지 비교함
+		//밑에는 p1객체에대한 메모리주소를 기반으로한 정수값을 비교해서 다를수밖에없음)
 		System.out.println("p1.equals(p2) :" + p1.equals(p2));
 		System.out.println("p1==p2 :" + (p1==p2));
 		
@@ -77,6 +79,35 @@ class Person{
 		return "Person [id=" + id + ", name=" + name + "]";
 	}
 	
+	//equals와 hashcode를 오버라이드 해주는 버튼누르기
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	/*
 	@Override
 	public boolean equals(Object obj) {
 		Person p = (Person) obj;
@@ -88,7 +119,7 @@ class Person{
 	public int hashCode() {
 		return (name+id).hashCode();
 	}
-	
+	*/
 	public int getId() {
 		return id;
 	}

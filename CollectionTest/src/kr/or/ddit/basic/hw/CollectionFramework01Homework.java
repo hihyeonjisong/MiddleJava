@@ -25,7 +25,7 @@ public class CollectionFramework01Homework {
 		studentList.add(new Student("1", "송현지", 70, 90, 80));
 		studentList.add(new Student("5", "성이수", 90, 90, 80));
 		studentList.add(new Student("2", "선민수", 90, 90, 100));
-		studentList.add(new Student("9", "서어진", 80, 70, 80));
+		studentList.add(new Student("9", "서어진", 90, 70, 80));
 		studentList.add(new Student("7", "김나혜", 100, 100, 100));
 		
 		//studentList에 있는 5명의점수들과 5명의점수를 비교함
@@ -58,6 +58,7 @@ public class CollectionFramework01Homework {
 }
 
 class Student implements Comparable <Student> {
+	//필드 만들기
 	 String stu_no;//학번
 	 String stu_nm;//이름
 	 int korean;//국어점수
@@ -138,8 +139,13 @@ class RankDesc implements Comparator<Student>{
 
 	@Override
 	public int compare(Student o1, Student o2) {
+		
 //		Integer sum = new Integer(o1.getSum())
-		return new Integer(o1.getSum()).compareTo(o2.getSum())*-1;//역순
+		int result = Integer.compare(o1.getSum(), o2.getSum())*-1;
+		if(result==0) {
+			result = o1.getStu_no().compareTo(o2.getStu_no())*-1;//역순
+		}
+		return result;//역순
 	}
 	
 }

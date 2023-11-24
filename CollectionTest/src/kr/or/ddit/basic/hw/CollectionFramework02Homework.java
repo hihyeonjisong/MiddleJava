@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,13 +16,8 @@ public class CollectionFramework02Homework {
 	 * 사용자는 로또를 구매할 때 구매할 금액을 입력하고 입력한 금액에 맞게 로또번호를 출력한다. (단, 로또 한장의 금액은 1000원이고
 	 * 거스름돈도 계산하여 출력한다.)
 	 * 
-	 * ========================== 
-	 * Lotto 프로그램
-	 *  -------------------------- 
-	 *  1. Lotto 구입
-	 * 2. 프로그램 종료
-	 *  ========================== 
-	 *  메뉴선택 : 1 <-- 입력
+	 * ========================== Lotto 프로그램 -------------------------- 1. Lotto 구입
+	 * 2. 프로그램 종료 ========================== 메뉴선택 : 1 <-- 입력
 	 * 
 	 * Lotto 구입 시작
 	 * 
@@ -31,13 +27,8 @@ public class CollectionFramework02Homework {
 	 * 
 	 * 받은 금액은 2500원이고 거스름돈은 500원입니다.
 	 * 
-	 * ========================== 
-	 * Lotto 프로그램
-	 *  -------------------------- 
-	 *  1. Lotto 구입
-	 * 2. 프로그램 종료 
-	 * ========================== 
-	 * 메뉴선택 : 2 <-- 입력
+	 * ========================== Lotto 프로그램 -------------------------- 1. Lotto 구입
+	 * 2. 프로그램 종료 ========================== 메뉴선택 : 2 <-- 입력
 	 * 
 	 * 감사합니다
 	 */
@@ -46,71 +37,34 @@ public class CollectionFramework02Homework {
 		printLottoHome();
 		System.out.println("메뉴를 선택해주세요.");
 		int selectNo = sc.nextInt();
-
+		
 		if (selectNo == 1) {
 			System.out.println("Lotto 구입시작");
 			System.out.println("가격:1000원에 로또한장");
 			System.out.println("금액을 입력해주세요");
 			int money = sc.nextInt();
-
-//			Set<Integer> lottoNum = new TreeSet();
-			List lottoNum = new ArrayList();
-			while (lottoNum.size()<6) {
-				int ran = (int) ((Math.random()*45)+1);
-				lottoNum.add(ran);
-			}
-			System.out.println("랜덤로또값: "+ lottoNum);
-//			System.out.println("행운의 로또 번호는:" + lottoNum);
-
 			int getlotto = money / 1000;
 			int change = money - getlotto * 1000;
 			// int change = money%1000;
+			System.out.println("받은금액:" + money + "\t" + "거스름돈" + change);
 
+			Set<Integer> lottoNum = new HashSet<Integer>();
+			Random rd = new Random();
 			for (int num = 1; num <= getlotto; num++) {
 				System.out.print("로또번호" + num + ":");
-
-				for (int i = 1; i < getlotto+2; i++) {
-					lottoNum.clear();
-					while (lottoNum.size() < 6) {
-						int ran = (int)(Math.random() * 45) + 1;
-						if(!lottoNum.contains(ran)) {
-						lottoNum.add(ran);
-					}
+				while (lottoNum.size() < 6) {
+					lottoNum.add(rd.nextInt(45) + 1);
 				}
-					System.out.print(i + ",");
+				ArrayList<Integer> lottoList = new ArrayList<Integer>(lottoNum);
+				Collections.sort(lottoNum);
+				System.out.println("로또번호" + num + ":" + lottoList);
+				lottoNum.clear();
 			}
-			Collections.sort(lottoNum);
-			}
-		}else if(selectNo==2) {
-			System.out.println("감사합니다");
-			
 		}
-
-//		HashSet lotto1 = new HashSet();
-//		lotto1.add(2);
-//		lotto1.add(3);
-//		lotto1.add(4);
-//		lotto1.add(5);
-//		lotto1.add(6);
-//		lotto1.add(7);	
-//		
-//		HashSet lotto2 = new HashSet();
-//		lotto2.add(20);
-//		lotto2.add(21);
-//		lotto2.add(22);
-//		lotto2.add(23);
-//		lotto2.add(24);
-//		lotto2.add(25);	
-//		
-//		System.out.println(lotto1);
-//		System.out.println(lotto2);
-//		
-//		HashSet lotto = new HashSet();
-//		while (lotto.size()<6) {
-//			int ran = (int) ((Math.random()*45)+1);
-//			lotto.add(ran);
-//		}
-//		System.out.println("랜덤로또값: "+ lotto);
+		
+	}
+	private static void Lottonum(int price) {
+		
 	}
 
 	public static void printLottoHome() {

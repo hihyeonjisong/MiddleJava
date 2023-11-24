@@ -14,6 +14,7 @@ public class T06TreeSetTest {
 		List<String> abcList = new ArrayList<String>();
 		
 		//영어대문자를 문자열로 변환하여 List에 저장하기
+		//value of : ~를 --타입의 변수로 바꿔준다는 뜻
 		for (char ch = 'A'; ch < 'Z'; ch++) {
 			String temp = String.valueOf(ch);
 			abcList.add(temp);
